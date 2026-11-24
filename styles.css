@@ -1,0 +1,88 @@
+/* Plagiarism Checker X: the app's colours (theme.css), small radii, flat. One compact row. */
+.plagiarism-pcx {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 2px 8px;
+    margin: 4px 0;
+    padding: 3px 8px 3px 4px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: #ffffff;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: #475569;
+    white-space: nowrap;
+}
+
+.plagiarism-pcx .pcx-logo {
+    width: 16px;
+    height: 16px;
+    flex: none;
+}
+
+.plagiarism-pcx .pcx-stat b {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.plagiarism-pcx .pcx-ok b {
+    color: #16a34a;
+}
+
+.plagiarism-pcx .pcx-warn b {
+    color: #b45309;
+}
+
+.plagiarism-pcx .pcx-bad b {
+    color: #dc2626;
+}
+
+.plagiarism-pcx .pcx-badge {
+    color: #4f46e5;
+}
+
+.plagiarism-pcx .pcx-link {
+    color: #4f46e5;
+    text-decoration: none;
+}
+
+.plagiarism-pcx .pcx-link:hover {
+    text-decoration: underline;
+}
+
+.plagiarism-pcx .pcx-muted {
+    color: #5b6b81;
+}
+
+.plagiarism-pcx .pcx-error {
+    color: #dc2626;
+    white-space: normal;
+}
+
+.plagiarism-pcx .singlebutton {
+    display: inline-block;
+    margin: 0;
+}
+
+.plagiarism-pcx .singlebutton .btn {
+    padding: 0 8px;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    border-radius: 6px;
+}
+
+/* Grading table: show only the result next to an online text answer, not Moodle's text preview
+   (the magnifier still opens the full answer). */
+[id^="mod_assign_grading"] td:has(> .core_plagiarism_links .plagiarism-pcx) {
+    font-size: 0;
+}
+
+[id^="mod_assign_grading"] td:has(> .core_plagiarism_links .plagiarism-pcx) > * {
+    font-size: 0.9375rem;
+}
+
+[id^="mod_assign_grading"] td:has(> .core_plagiarism_links .plagiarism-pcx) > .no-overflow,
+[id^="mod_assign_grading"] td:has(> .core_plagiarism_links .plagiarism-pcx) > br {
+    display: none;
+}
