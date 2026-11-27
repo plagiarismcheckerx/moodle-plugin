@@ -239,7 +239,9 @@ final class checker {
             'source' => \core_text::substr((string) parse_url($CFG->wwwroot, PHP_URL_HOST), 0, 60),
             'title' => \core_text::substr(format_string($cm->name, true, ['escape' => false]), 0, 255),
         ];
-        $idem = 'moodle-' . $cm->id . '-' . $userid . '-' . sha1($itemkey . '|' . $identifier . '|' . implode(',', $modules));
+        // One opaque key per submission version and set of checks: no Moodle ids leave the site.
+        $idem = 'moodle-' . hash_hmac('sha256', implode('|', [$cm->id, $userid, $itemkey, $identifier,
+            implode(',', $modules)]), (string) $CFG->siteidentifier);
         $headers = ['Idempotency-Key' => $idem];
 
         $res = null;

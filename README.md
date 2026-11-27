@@ -39,19 +39,46 @@ Check assignment submissions for plagiarism and AI writing with
 - `plagiarism/pcx:check`: run a check (teachers, managers).
 - `plagiarism/pcx:viewreport`: see results (teachers, managers). Students do not see results.
 
-## Privacy and external service
+## External service and privacy
 
-When a teacher checks a submission, the plugin sends the submission's text, the assignment's
-name and the site's host name to Plagiarism Checker X (https://api.plagiarismcheckerx.com),
-which checks it and keeps the result in the account that connected the site. No student name or
-email address is sent. Connecting the site also sends the site's name and the address of the
-connect page. Nothing is sent until an administrator connects the site, and then only when a
-teacher clicks Check or Re-check.
+This plugin relies on an external service: **Plagiarism Checker X**, run by Plagiarism Checker X
+outside of Moodle. It does not work without a Plagiarism Checker X account, and checks spend
+words from that account (paid plans; see https://plagiarismcheckerx.com/pricing).
 
-- Terms: https://plagiarismcheckerx.com/terms-conditions
+**Where data goes:** `https://api.plagiarismcheckerx.com` over HTTPS.
+
+**When data is sent:** nothing is sent until an administrator connects the site. After that,
+data is sent only when a teacher clicks **Check** or **Re-check** on a submission. Nothing is
+sent automatically when students submit.
+
+**What is sent when a teacher checks a submission:**
+
+- The text of the submission: online text, or text read on the Moodle server from the
+  submitted file. The file itself is not uploaded.
+- The assignment's name.
+- The site's host name (for example `moodle.example.edu`).
+- The checks chosen for the assignment.
+- A random-looking request key (a one-way hash made on the Moodle server), used only so a
+  repeated click doesn't start (and charge for) a second check. It contains no Moodle ids.
+
+**What is sent when an administrator connects the site:** the site's full name and the address
+of the plugin's connect page (OAuth client registration), or nothing extra if an API key is pasted
+instead.
+
+**What is not sent:** student names, usernames, email addresses, Moodle user ids, or any other profile data.
+
+**What Plagiarism Checker X keeps:** the submitted text and the check results are stored in the
+Plagiarism Checker X account that connected the site, where the account owner can view and delete
+them. Moodle keeps only the scores, the report link and the check's id.
+
+Students see a notice on the submission page that their work may be sent to Plagiarism Checker X
+for checking (the wording can be changed in the plugin settings).
+
+- Terms of service: https://plagiarismcheckerx.com/terms-conditions
 - Privacy policy: https://plagiarismcheckerx.com/privacy-policy
 
-The plugin implements the Moodle Privacy API (export and deletion of stored check results).
+The plugin implements the Moodle Privacy API: it declares the data sent to Plagiarism Checker X
+and supports export and deletion of the check results stored in Moodle.
 
 ## Limitations
 
